@@ -1,21 +1,20 @@
-package pl.nullpointerexception.shop.product.model;
+package pl.nullpointerexception.shop.admin.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "product")
 @Getter
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-public class Product {
+@AllArgsConstructor
+public class AdminProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
