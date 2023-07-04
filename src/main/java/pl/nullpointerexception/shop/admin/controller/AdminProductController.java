@@ -1,5 +1,6 @@
 package pl.nullpointerexception.shop.admin.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.nullpointerexception.shop.admin.controller.dto.AdminProductDTO;
 import pl.nullpointerexception.shop.admin.model.AdminProduct;
 import pl.nullpointerexception.shop.admin.service.AdminProductService;
-
-import java.util.Locale;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,12 +28,12 @@ public class AdminProductController {
     }
 
     @PostMapping("")
-    public AdminProduct createProduct(@RequestBody AdminProductDTO adminProductDTO) {
+    public AdminProduct createProduct(@RequestBody @Valid AdminProductDTO adminProductDTO) {
         return productService.createProduct(mapAdminProduct(adminProductDTO, EMPTY_ID));
     }
 
     @PutMapping("/{id}")
-    public AdminProduct updateProduct(@RequestBody AdminProductDTO adminProductDTO, @PathVariable Long id) {
+    public AdminProduct updateProduct(@RequestBody @Valid AdminProductDTO adminProductDTO, @PathVariable Long id) {
         return productService.updateProduct(mapAdminProduct(adminProductDTO, id)
         );
     }
@@ -46,7 +45,7 @@ public class AdminProductController {
                 .category(adminProductDTO.getCategory())
                 .description(adminProductDTO.getDescription())
                 .price(adminProductDTO.getPrice())
-                .currency(adminProductDTO.getCurrency().toUpperCase(Locale.ROOT))
+                .currency(adminProductDTO.getCurrency())
                 .build();
     }
 
