@@ -1,5 +1,6 @@
 package pl.nullpointerexception.shop.admin.controller;
 
+import com.github.slugify.Slugify;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -82,7 +83,14 @@ public class AdminProductController {
                 .price(adminProductDTO.getPrice())
                 .currency(adminProductDTO.getCurrency())
                 .image(adminProductDTO.getImage())
+                .slug(slugifySlug(adminProductDTO.getSlug()))
                 .build();
+    }
+
+    private static String slugifySlug(String slug) {
+        Slugify slugify = new Slugify();
+        return slugify.withCustomReplacement("_", "-")
+                .slugify(slug);
     }
 
 }
